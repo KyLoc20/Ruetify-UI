@@ -1,0 +1,88 @@
+@font-face {
+    font-family: "SF Mono";
+    src: url("/fonts/SFMono.woff") format("woff");
+}
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-display: swap;
+    font-weight: 100;
+    src: url("/fonts/Roboto/Roboto-Thin.ttf") format('truetype');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-display: swap;
+    font-weight: 300;
+    src: url("/fonts/Roboto/Roboto-Light.ttf") format('truetype');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-display: swap;
+    font-weight: 400;
+    src: url("/fonts/Roboto/Roboto-Regular.ttf") format('truetype');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-display: swap;
+    font-weight: 500;
+    src: url("/fonts/Roboto/Roboto-Medium.ttf") format('truetype');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-display: swap;
+    font-weight: 700;
+    src: url("/fonts/Roboto/Roboto-Bold.ttf") format('truetype');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-display: swap;
+    font-weight: 800;
+    src: url("/fonts/Roboto/Roboto-Black.ttf") format('truetype');
+}
+
+@font-face {
+    font-family: 'Consolas';
+    font-style: normal;
+    font-display: swap;
+    src: url("/fonts/Consolas/Consolas.ttf") format('truetype');
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: left;
+}
+
+ul {
+    padding-left: 30px;
+    margin: 0 0 16px;
+}
+
+li {
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+code {
+    font-family: Consolas;
+    font-size: 0.85em;
+    background-color: rgba(255, 229, 100, 0.2);
+    line-height: 1.4;
+    padding: 0 2px;
+    border-radius: 2px;
+}

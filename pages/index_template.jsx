@@ -1,5 +1,5 @@
 import Head from "next/head";
-
+import Detail from "../components/AppDetail"
 export default function Home() {
   return (
     <div className="container">
@@ -10,6 +10,7 @@ export default function Home() {
 
       <main>
         <h1 className="title">Welcome to Ruetify-UI!</h1>
+        <Detail></Detail>
       </main>
       <style jsx>{`
         .container {
