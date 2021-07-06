@@ -12,7 +12,6 @@ const Context = styled("section")`
   margin: 0 auto;
   width: 100%;
   max-width: 868px;
-  background: rgba(0, 255, 0, 0.12);
 `;
 export default function MainContext(props) {
   return (
