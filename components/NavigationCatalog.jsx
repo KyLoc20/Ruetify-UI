@@ -11,12 +11,6 @@ const Component = styled("section")`
   padding: 8px;
   overflow-y: scroll;
 `;
-const TestItem = styled("div")`
-  width: 148px;
-  height: 50px;
-  background: red;
-  margin: 20px;
-`;
 const ItemComponent = styled("section")``;
 const ItemContent = styled("section")`
   display: flex;

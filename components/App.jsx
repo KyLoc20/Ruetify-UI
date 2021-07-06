@@ -111,7 +111,7 @@ const getDrawerItems = () => [
     children: [],
   },
 ];
-export default function AppContainer() {
+export default function AppContainer(props) {
   const [selectedNavigation,setSelectedNavigation]=React.useState("autocomplete")
   const handleSelectFromCatalog=(where)=>{
     console.log("Here is App, handleSelectFromCatalog", where);
@@ -132,7 +132,7 @@ export default function AppContainer() {
       </LeftContainer>
       <RightContainer>
         <AppBar></AppBar>
-        <MainContext></MainContext>
+        <MainContext>{props.children}</MainContext>
         <ContentCatalog></ContentCatalog>
       </RightContainer>
     </Page>

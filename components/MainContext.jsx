@@ -8,15 +8,16 @@ const Container = styled("section")`
 `;
 const Context = styled("section")`
   display: flex;
+  flex-direction:column;
   margin: 0 auto;
   width: 100%;
   max-width: 868px;
   background: rgba(0, 255, 0, 0.12);
 `;
-export default function MainContext() {
+export default function MainContext(props) {
   return (
-    <Container>
-      <Context>MainContext</Context>
+    <Container className="main-context">
+      <Context className="content">{props.children}</Context>
     </Container>
   );
 }
