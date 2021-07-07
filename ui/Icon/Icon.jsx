@@ -39,8 +39,10 @@ function Icon(props) {
       }}
     >
       <svg
-        css={{...computedWidth(getSize(props.size)),
-          ...computedHeight(getSize(props.size))}}
+        css={{
+          ...computedWidth(getSize(props.size)),
+          ...computedHeight(getSize(props.size)),
+        }}
         focusable="false"
         aria-hidden="true"
         viewBox={viewBox}
@@ -71,7 +73,7 @@ Icon.propTypes = {
         return validateFailing(propName, componentName);
       }
     } else if (typeof value === "number") {
-      return true;
+      return;
     } else {
       return validateFailing(propName, componentName);
     }
