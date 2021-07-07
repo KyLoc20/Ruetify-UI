@@ -12,6 +12,7 @@ const Component = styled("section")`
   height: 64px;
   border-bottom: solid 1px rgba(0, 0, 0, 0.12);
   overflow: hidden;
+  background:#fff;
 `;
 const Spacing = styled("div")`
   flex: 1;
@@ -40,10 +41,10 @@ const IconWrapper = styled("div")`
 const InputWrapper = styled("div")`
   display: flex;
   align-items: center;
-  flex:1;
+  flex: 1;
   min-width: 60px;
   input {
-    width:100%;
+    width: 100%;
     height: 20px;
     padding: 4px 0 2px;
     border: none;
@@ -170,8 +171,25 @@ const ButtonComponent = styled(ButtonDefaultRemoval)`
   }
 `;
 function Button(props) {
-  return <ButtonComponent className="btn">{props.children}</ButtonComponent>;
+  const computedWidth = () => {
+    return props.width ? `${props.width}px` : null;
+  };
+  const computedHeight = () => {
+    return props.height ? `${props.height}px` : null;
+  };
+  return (
+    <ButtonComponent
+      className="btn"
+      style={{ width: computedWidth(), height: computedHeight() }}
+    >
+      {props.children}
+    </ButtonComponent>
+  );
 }
+Button.propTypes = {
+  width: PropTypes.number,
+  height: PropTypes.number,
+};
 import Icon from "../ui/Icon/Icon";
 const IconButtonComponent = styled(ButtonDefaultRemoval)`
   display: flex;
@@ -249,6 +267,9 @@ export default function AppBar(props) {
       <IconButton icon="setting2"></IconButton>
       <IconButton icon="job"></IconButton>
       <IconButton icon="notice2"></IconButton>
+      <Button width={64}>
+        <Icon name="translation"></Icon>
+      </Button>
     </Component>
   );
 }

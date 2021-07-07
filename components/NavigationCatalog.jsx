@@ -5,8 +5,8 @@ import clsx from "clsx";
 const Component = styled("section")`
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: calc(100% - 64px);
+  width: 300px;
+  height: calc(100vh - 64px);
   box-sizing: border-box;
   padding: 8px;
   overflow-y: scroll;

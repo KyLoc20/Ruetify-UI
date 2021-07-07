@@ -9,6 +9,7 @@ const Component = styled("section")`
   padding: 4px 16px;
   height: 64px;
   border-bottom:solid 1px rgba(0,0,0,.12);
+  background:#fff;
 `;
 const Logo = styled("span")`
   width: 148px;

@@ -12,11 +12,16 @@ const Page = styled("section")`
   position: relative;
 `;
 const LeftContainer = styled("section")`
+  position: relative;
+  flex-shrink:0;
+  width: 300px;
+  height: 100vh;
+`;
+const NavigationContext = styled("section")`
   display: flex;
   position: relative;
   flex-direction: column;
-  width: 300px;
-  height: 100vh;
+  position: fixed;
 `;
 const RightContainer = styled("section")`
   display: flex;
@@ -112,14 +117,15 @@ const getDrawerItems = () => [
   },
 ];
 export default function AppContainer(props) {
-  const [selectedNavigation,setSelectedNavigation]=React.useState("autocomplete")
-  const handleSelectFromCatalog=(where)=>{
+  const [selectedNavigation, setSelectedNavigation] =
+    React.useState("autocomplete");
+  const handleSelectFromCatalog = (where) => {
     console.log("Here is App, handleSelectFromCatalog", where);
     let link = where.link;
-    if(link){
-      setSelectedNavigation(where.label)
+    if (link) {
+      setSelectedNavigation(where.label);
     }
-  }
+  };
   return (
     <Page>
       <Head>
@@ -127,8 +133,16 @@ export default function AppContainer(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <LeftContainer>
-        <AppDetail version="v0.0.1"></AppDetail>
-        <NavigationCatalog items={getDrawerItems()} layerTotal={3} indent={6} initSelectedLabel={selectedNavigation} onChange={handleSelectFromCatalog}></NavigationCatalog>
+        <NavigationContext>
+          <AppDetail version="v0.0.1"></AppDetail>
+          <NavigationCatalog
+            items={getDrawerItems()}
+            layerTotal={3}
+            indent={6}
+            initSelectedLabel={selectedNavigation}
+            onChange={handleSelectFromCatalog}
+          ></NavigationCatalog>
+        </NavigationContext>
       </LeftContainer>
       <RightContainer>
         <AppBar></AppBar>
