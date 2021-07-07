@@ -1,5 +1,6 @@
 import * as React from "react";
 import styled from "@emotion/styled";
+import PropTypes from "prop-types";
 const Component = styled("section")`
   position: fixed;
   display: flex;
@@ -42,7 +43,7 @@ function SearchInput(props) {
 }
 const DividerComponent = styled("div")`
   height: 16px;
-  border-right:solid 1px rgba(0, 0, 0, 0.12);
+  border-right: solid 1px rgba(0, 0, 0, 0.12);
   max-height: calc(100% - 16px);
   margin: auto 8px;
 `;
@@ -51,6 +52,7 @@ function Divider() {
 }
 const ButtonDefaultRemoval = styled("button")`
   margin: 0;
+  padding: 0;
   outline: none;
   border: none;
   cursor: pointer;
@@ -76,6 +78,68 @@ const ButtonComponent = styled(ButtonDefaultRemoval)`
 function Button(props) {
   return <ButtonComponent className="btn">{props.children}</ButtonComponent>;
 }
+import Icon from "../ui/Icon/Icon";
+const IconButtonComponent = styled(ButtonDefaultRemoval)`
+  display: flex;
+  flex-shrink:0;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-sizing: border-box;
+  transition: background 280ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  &:hover {
+    background: rgba(0, 0, 0, 0.08);
+  }
+`;
+const ButtonSizeMap = {
+  sm: 44,
+  md: 48,
+  lg: 60,
+};
+function IconButton(props) {
+  const getSize = (size) => {
+    if (ButtonSizeMap[size] !== undefined) return ButtonSizeMap[size];
+    else return size;
+  };
+  const computedWidth = (sizeNum) => {
+    return { width: `${sizeNum}px` };
+  };
+  const computedHeight = (sizeNum) => {
+    return { height: `${sizeNum}px` };
+  };
+  return (
+    <IconButtonComponent
+      className="btn iconed"
+      css={{
+        ...computedWidth(getSize(props.size)),
+        ...computedHeight(getSize(props.size)),
+      }}
+    >
+      <Icon
+        name={props.icon}
+        size={props.iconSize}
+        color="rgba(0,0,0,.54)"
+      ></Icon>
+    </IconButtonComponent>
+  );
+}
+IconButton.propTypes = {
+  icon: PropTypes.string,
+  size: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.oneOf(["sm", "md", "lg"]),
+  ]),
+  iconSize: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.oneOf(["sm", "md", "lg"]),
+  ]),
+};
+IconButton.defaultProps = {
+  size: "md",
+  iconSize: "md",
+};
+
 /* For Content Catalog */
 export default function AppBar(props) {
   return (
@@ -88,7 +152,10 @@ export default function AppBar(props) {
       <Button>Support</Button>
       <Button>Team</Button>
       <Divider></Divider>
-      
+      <IconButton icon="store"></IconButton>
+      <IconButton icon="setting2"></IconButton>
+      <IconButton icon="job"></IconButton>
+      <IconButton icon="notice2"></IconButton>
     </Component>
   );
 }

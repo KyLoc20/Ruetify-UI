@@ -10,7 +10,7 @@ export default function Home() {
         class can be used to alter the background or text color.
       </Typography>
       <Typography type="h2">Usage</Typography>
-      <Typography type="h3">Usage</Typography>
+      <Typography type="h3">Props</Typography>
       <Typography type="h4">block</Typography>
       <Typography type="p">
         <strong>depressed</strong> buttons still maintain their background
