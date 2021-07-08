@@ -1,5 +1,6 @@
 import App from "../components/App";
 import Typography from "../ui/Typography/Typography";
+import { GroupRow,GroupBox } from "../ui/layout/Group";
 export default function Home() {
   return (
     <App>
@@ -25,49 +26,8 @@ export default function Home() {
         backgrounds. If you need white text, simply add the white--text class.
       </Typography>
 
-      <Typography type="quote">
-        <code>v-btn</code> is the only component that behaves differently when using the dark
-        prop. Normally components use the dark prop to denote that they have a
-        dark colored background and need their text to be white. While this will
-        work for v-btn, it is advised to only use the prop when the button IS ON
-        a colored background due to the disabled state blending in with white
-        backgrounds. If you need white text, simply add the white--text class.
-      </Typography>      <Typography type="quote">
-        <code>v-btn</code> is the only component that behaves differently when using the dark
-        prop. Normally components use the dark prop to denote that they have a
-        dark colored background and need their text to be white. While this will
-        work for v-btn, it is advised to only use the prop when the button IS ON
-        a colored background due to the disabled state blending in with white
-        backgrounds. If you need white text, simply add the white--text class.
-      </Typography>      <Typography type="quote">
-        <code>v-btn</code> is the only component that behaves differently when using the dark
-        prop. Normally components use the dark prop to denote that they have a
-        dark colored background and need their text to be white. While this will
-        work for v-btn, it is advised to only use the prop when the button IS ON
-        a colored background due to the disabled state blending in with white
-        backgrounds. If you need white text, simply add the white--text class.
-      </Typography>      <Typography type="quote">
-        <code>v-btn</code> is the only component that behaves differently when using the dark
-        prop. Normally components use the dark prop to denote that they have a
-        dark colored background and need their text to be white. While this will
-        work for v-btn, it is advised to only use the prop when the button IS ON
-        a colored background due to the disabled state blending in with white
-        backgrounds. If you need white text, simply add the white--text class.
-      </Typography>      <Typography type="quote">
-        <code>v-btn</code> is the only component that behaves differently when using the dark
-        prop. Normally components use the dark prop to denote that they have a
-        dark colored background and need their text to be white. While this will
-        work for v-btn, it is advised to only use the prop when the button IS ON
-        a colored background due to the disabled state blending in with white
-        backgrounds. If you need white text, simply add the white--text class.
-      </Typography>      <Typography type="quote">
-        <code>v-btn</code> is the only component that behaves differently when using the dark
-        prop. Normally components use the dark prop to denote that they have a
-        dark colored background and need their text to be white. While this will
-        work for v-btn, it is advised to only use the prop when the button IS ON
-        a colored background due to the disabled state blending in with white
-        backgrounds. If you need white text, simply add the white--text class.
-      </Typography>
+      <GroupBox>123</GroupBox>
+      <GroupBox></GroupBox>
     </App>
   );
 }
