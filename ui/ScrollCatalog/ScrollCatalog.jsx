@@ -59,7 +59,12 @@ export default function ScrollCatalog(props) {
 }
 ScrollCatalog.propTypes = {
   path: PropTypes.string.isRequired, //'component/avatar'
-  items: PropTypes.array.isRequired,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      anchor: PropTypes.string,
+      text: PropTypes.string,
+    })
+  ).isRequired,
   title: PropTypes.string,
 };
 ScrollCatalog.defaultProps = {

@@ -1,6 +1,7 @@
 import App from "../components/App";
 import Typography from "../ui/Typography/Typography";
 import { GroupRow,GroupBox } from "../ui/layout/Group";
+import Button from "../ui/Button/Button"
 export default function Home() {
   return (
     <App>
@@ -26,7 +27,7 @@ export default function Home() {
         backgrounds. If you need white text, simply add the white--text class.
       </Typography>
 
-      <GroupBox>123</GroupBox>
+      <GroupBox><Button>NORMAL</Button></GroupBox>
       <GroupBox></GroupBox>
     </App>
   );
