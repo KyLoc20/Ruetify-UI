@@ -1,6 +1,7 @@
 import App from "../components/App";
 import Typography from "../ui/Typography/Typography";
 import { GroupRow, GroupBox } from "../ui/layout/Group";
+import CircularAnimation from "../ui/effect/CircularAnimation";
 import Button from "../ui/Button/Button";
 export default function Home() {
   return (
@@ -21,7 +22,7 @@ export default function Home() {
       </Typography>
       <GroupBox>
         <Button variant="plain" color="default">
-          DEFAULT
+        <CircularAnimation determinate progress={65}></CircularAnimation>
         </Button>
         <Button variant="plain" color="primary">
           PRIMARY
@@ -178,14 +179,14 @@ export default function Home() {
         Use the prop <code>rounded</code> to make buttons have round edges.
       </Typography>
       <GroupBox>
-        <Button variant="plain" color="default" rounded>
-          DEFAULT
-        </Button>
         <Button variant="plain" color="primary" rounded>
-          PRIMARY
+          PLAIN
         </Button>
-        <Button variant="plain" color="error" rounded>
-          ERROR
+        <Button variant="text" color="primary" rounded>
+          TEXT
+        </Button>
+        <Button variant="outlined" color="primary" rounded>
+          OUTLINED
         </Button>
         <Button variant="plain" disabled rounded>
           DISABLED

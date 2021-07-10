@@ -64,6 +64,7 @@ export default function Button(props) {
   };
   const computedBorderRadius=()=>{
     if(props.tile)return null
+    else if(props.rounded)return props.height?`${props.height/2}px`:getSize(props.size)["height"]
     else return `4px`
   }
   const computedBackgroundColor = () => {
