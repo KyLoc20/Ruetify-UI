@@ -175,21 +175,19 @@ export default function Home() {
       </GroupBox>
       <Typography type="h2">Rounded</Typography>
       <Typography type="p">
-        Use the prop <code>depressed</code> to make buttons{" "}
-        <strong>depressed</strong> which still maintain their background color
-        but have no box shadow.
+        Use the prop <code>rounded</code> to make buttons have round edges.
       </Typography>
       <GroupBox>
-        <Button variant="plain" color="default" depressed>
+        <Button variant="plain" color="default" rounded>
           DEFAULT
         </Button>
-        <Button variant="plain" color="primary" depressed>
+        <Button variant="plain" color="primary" rounded>
           PRIMARY
         </Button>
-        <Button variant="plain" color="error" depressed>
+        <Button variant="plain" color="error" rounded>
           ERROR
         </Button>
-        <Button variant="plain" disabled depressed>
+        <Button variant="plain" disabled rounded>
           DISABLED
         </Button>
       </GroupBox>
