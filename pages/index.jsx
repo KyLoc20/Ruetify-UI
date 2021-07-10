@@ -135,6 +135,26 @@ export default function Home() {
           </Button>
         </GroupRow>
       </GroupBox>
+      <Typography type="h2">Depressed</Typography>
+      <Typography type="p">
+        Use the prop <code>depressed</code> to make buttons{" "}
+        <strong>depressed</strong> which still maintain their background color
+        but have no box shadow.
+      </Typography>
+      <GroupBox>
+        <Button variant="plain" color="default" depressed>
+          DEFAULT
+        </Button>
+        <Button variant="plain" color="primary" depressed>
+          PRIMARY
+        </Button>
+        <Button variant="plain" color="error" depressed>
+          ERROR
+        </Button>
+        <Button variant="plain" disabled depressed>
+          DISABLED
+        </Button>
+      </GroupBox>
       <GroupBox></GroupBox>
     </App>
   );
