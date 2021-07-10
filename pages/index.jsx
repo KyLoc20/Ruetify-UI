@@ -69,17 +69,72 @@ export default function Home() {
           DISABLED
         </Button>
       </GroupBox>
-
-      <Typography type="quote">
-        <code>v-btn</code> is the only component that behaves differently when
-        using the dark prop. Normally components use the dark prop to denote
-        that they have a dark colored background and need their text to be
-        white. While this will work for v-btn, it is advised to only use the
-        prop when the button IS ON a colored background due to the disabled
-        state blending in with white backgrounds. If you need white text, simply
-        add the white--text class.
+      <Typography type="h2">Color</Typography>
+      <Typography type="p">
+        Use the prop <code>color</code> to style the color theme of the buttons.
       </Typography>
-
+      <Typography type="quote">
+        Preset themes have been provided including <code>default</code>,{" "}
+        <code>primary</code>, <code>error</code>, <code>disabled</code>.
+      </Typography>
+      <Typography type="h2">Size</Typography>
+      <Typography type="p">
+        Use the prop <code>size</code> to set the size of the buttons which
+        decides the padding, fontsize and height.
+      </Typography>
+      <GroupBox block>
+        <GroupRow>
+          <Button variant="plain" color="primary" size="xsm">
+            X-SMALL
+          </Button>
+          <Button variant="plain" color="primary" size="sm">
+            SMALL
+          </Button>
+          <Button variant="plain" color="primary" size="md">
+            MEDIUM
+          </Button>
+          <Button variant="plain" color="primary" size="lg">
+            LARGE
+          </Button>
+          <Button variant="plain" color="primary" size="xlg">
+            X-LARGE
+          </Button>
+        </GroupRow>
+        <GroupRow>
+          <Button variant="text" color="primary" size="xsm">
+            X-SMALL
+          </Button>
+          <Button variant="text" color="primary" size="sm">
+            SMALL
+          </Button>
+          <Button variant="text" color="primary" size="md">
+            MEDIUM
+          </Button>
+          <Button variant="text" color="primary" size="lg">
+            LARGE
+          </Button>
+          <Button variant="text" color="primary" size="xlg">
+            X-LARGE
+          </Button>
+        </GroupRow>
+        <GroupRow>
+          <Button variant="outlined" color="primary" size="xsm">
+            X-SMALL
+          </Button>
+          <Button variant="outlined" color="primary" size="sm">
+            SMALL
+          </Button>
+          <Button variant="outlined" color="primary" size="md">
+            MEDIUM
+          </Button>
+          <Button variant="outlined" color="primary" size="lg">
+            LARGE
+          </Button>
+          <Button variant="outlined" color="primary" size="xlg">
+            X-LARGE
+          </Button>
+        </GroupRow>
+      </GroupBox>
       <GroupBox></GroupBox>
     </App>
   );

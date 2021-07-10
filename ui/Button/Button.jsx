@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import clsx from "clsx";
 import { createRipple, createRippleByAddingLayer } from "../effect/rippleable";
 import { getColor } from "./color";
+import { getSize } from "./size";
 const ButtonDefaultRemoval = styled("button")`
   margin: 0;
   padding: 0;
@@ -27,6 +28,7 @@ const ButtonComponent = styled(ButtonDefaultRemoval)`
   letter-spacing: 0.0892857143em;
   border-radius: 4px;
   transition: background 280ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  overflow: hidden;
   &.disabled {
     cursor: default;
   }
@@ -41,11 +43,11 @@ export default function Button(props) {
       return "0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12)";
     else return null;
   };
-  const computedWidth = () => {
-    return props.width ? `${props.width}px` : null;
-  };
-  const computedHeight = () => {
-    return props.height ? `${props.height}px` : null;
+  const computedSize = () => {
+    const sizeStyles = getSize(props.size);
+    if (props.height) sizeStyles["height"] = `${props.height}px`;
+    if (props.width) sizeStyles["width"] = `${props.width}px`;
+    return sizeStyles;
   };
   const computedBorder = () => {
     //only for outlined
@@ -97,10 +99,9 @@ export default function Button(props) {
     <ButtonComponent
       className={computedClasses()}
       style={{
+        ...computedSize(),
         background: computedBackgroundColor(),
         color: computedContentColor(),
-        width: computedWidth(),
-        height: computedHeight(),
         boxShadow: computedBoxShadow(),
         border: computedBorder(),
       }}
@@ -114,10 +115,7 @@ export default function Button(props) {
 }
 Button.propTypes = {
   variant: PropTypes.oneOf(["plain", "text", "outlined"]).isRequired,
-  size: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.oneOf(["sm", "md", "lg"]),
-  ]),
+  size: PropTypes.oneOf(["auto", "xsm", "sm", "md", "lg", "xlg"]),
   elevation: PropTypes.number,
   color: PropTypes.string,
   disabled: PropTypes.bool,
