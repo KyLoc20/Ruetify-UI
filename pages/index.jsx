@@ -137,6 +137,44 @@ export default function Home() {
       </GroupBox>
       <Typography type="h2">Depressed</Typography>
       <Typography type="p">
+        Use the prop <code>depressed</code> to make buttons
+        <strong>depressed</strong> which still maintain their background color
+        but have no box shadow.
+      </Typography>
+      <GroupBox>
+        <Button variant="plain" color="default" depressed>
+          DEFAULT
+        </Button>
+        <Button variant="plain" color="primary" depressed>
+          PRIMARY
+        </Button>
+        <Button variant="plain" color="error" depressed>
+          ERROR
+        </Button>
+        <Button variant="plain" disabled depressed>
+          DISABLED
+        </Button>
+      </GroupBox>
+      <Typography type="h2">Tile</Typography>
+      <Typography type="p">
+        Use the prop <code>tile</code> to remove buttons's border radius.
+      </Typography>
+      <GroupBox>
+        <Button variant="plain" color="primary" tile>
+          PLAIN
+        </Button>
+        <Button variant="text" color="primary" tile>
+          TEXT
+        </Button>
+        <Button variant="outlined" color="primary" tile>
+          OUTLINED
+        </Button>
+        <Button variant="plain" disabled tile>
+          DISABLED
+        </Button>
+      </GroupBox>
+      <Typography type="h2">Rounded</Typography>
+      <Typography type="p">
         Use the prop <code>depressed</code> to make buttons{" "}
         <strong>depressed</strong> which still maintain their background color
         but have no box shadow.

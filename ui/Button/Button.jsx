@@ -26,7 +26,6 @@ const ButtonComponent = styled(ButtonDefaultRemoval)`
   font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.0892857143em;
-  border-radius: 4px;
   transition: background 280ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   overflow: hidden;
   &.disabled {
@@ -63,6 +62,10 @@ export default function Button(props) {
         }`;
     else return null;
   };
+  const computedBorderRadius=()=>{
+    if(props.tile)return null
+    else return `4px`
+  }
   const computedBackgroundColor = () => {
     if (props.disabled) return getColor("disabled", props.variant, "main");
     if (isHovering)
@@ -104,6 +107,7 @@ export default function Button(props) {
         color: computedContentColor(),
         boxShadow: computedBoxShadow(),
         border: computedBorder(),
+        borderRadius:computedBorderRadius(),
       }}
       onClick={handleClick}
       onMouseEnter={handleHoverEnter}
