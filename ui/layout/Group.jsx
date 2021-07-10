@@ -69,7 +69,9 @@ function GroupBox(props) {
         justifyContent: computedJustifyContent(props.justifyContent),
         alignItems: computedAlignItems(props.alignItems),
       }}
-    >{props.children}</GroupBoxContainer>
+    >
+      {props.children}
+    </GroupBoxContainer>
   );
 }
 GroupBox.propTypes = {
@@ -88,10 +90,20 @@ function GroupRow(props) {
     <GroupRowContainer
       className="group-row"
       style={{
+        minWidth: props.width ? `${props.width}px` : null,
         justifyContent: computedJustifyContent(props.justifyContent),
         alignItems: computedAlignItems(props.alignItems),
       }}
-    >{props.children}</GroupRowContainer>
+    >
+      {props.children}
+    </GroupRowContainer>
   );
 }
+GroupRow.propTypes = {
+  width: PropTypes.number, //to place elements vertically in rows
+  ...FlexProps,
+};
+GroupRow.defaultProps = {
+  ...FlexDefaultProps,
+};
 export { GroupBox, GroupRow };

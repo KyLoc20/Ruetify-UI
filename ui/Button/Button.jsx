@@ -2,6 +2,7 @@ import * as React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import clsx from "clsx";
+import CircularAnimation from "../effect/CircularAnimation";
 import { createRipple, createRippleByAddingLayer } from "../effect/rippleable";
 import { getColor } from "./color";
 import { getSize } from "./size";
@@ -28,15 +29,53 @@ const ButtonComponent = styled(ButtonDefaultRemoval)`
   letter-spacing: 0.0892857143em;
   transition: background 280ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   overflow: hidden;
-  &.disabled {
+  &.disabled,
+  &.loading {
     cursor: default;
   }
 `;
-
+const Content = styled("span")`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 280ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+`;
+const LEComponent = styled("div")`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const TextEffect = styled("span")``;
+const AnimationEffect = styled("span")``;
+function LoadingEffect(props) {
+  return (
+    <LEComponent>
+      {props.indicator ? (
+        <TextEffect>{props.indicator}</TextEffect>
+      ) : (
+        <AnimationEffect>
+          <CircularAnimation size={props.size}></CircularAnimation>
+        </AnimationEffect>
+      )}
+    </LEComponent>
+  );
+}
+LoadingEffect.propTypes = {
+  size: PropTypes.number,
+  indicator: PropTypes.string, //text effect content
+};
 export default function Button(props) {
+  console.log("update", props.loading);
   const [isHovering, setIsHovering] = React.useState(false);
   const computedClasses = () =>
-    clsx(["btn", props.disabled && "disabled", props.variant]);
+    clsx([
+      "btn",
+      props.disabled && "disabled",
+      props.loading && "loading",
+      props.variant,
+    ]);
   const computedBoxShadow = () => {
     if (props.variant === "plain" && !props.disabled && !props.depressed)
       return "0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12)";
@@ -62,11 +101,14 @@ export default function Button(props) {
         }`;
     else return null;
   };
-  const computedBorderRadius=()=>{
-    if(props.tile)return null
-    else if(props.rounded)return props.height?`${props.height/2}px`:getSize(props.size)["height"]
-    else return `4px`
-  }
+  const computedBorderRadius = () => {
+    if (props.tile) return null;
+    else if (props.rounded)
+      return props.height
+        ? `${props.height / 2}px`
+        : getSize(props.size)["height"];
+    else return `4px`;
+  };
   const computedBackgroundColor = () => {
     if (props.disabled) return getColor("disabled", props.variant, "main");
     if (isHovering)
@@ -86,17 +128,20 @@ export default function Button(props) {
   const computedRippleColor = () => {
     return props.rippleColor || getColor(props.color, props.variant, "ripple");
   };
+  const computedContentOpacity = () => {
+    return props.loading ? 0 : 1;
+  };
   const handleClick = (e) => {
-    console.log("handleClick", e);
-    if (props.disabled) return;
+    if (props.disabled || props.loading) return;
     createRippleByAddingLayer(e, false, computedRippleColor());
+    props.onClick?.(e);
   };
   const handleHoverEnter = () => {
-    if (props.disabled) return;
+    if (props.disabled || props.loading) return;
     setIsHovering(true);
   };
   const handleHoverLeave = () => {
-    if (props.disabled) return;
+    if (props.disabled || props.loading) return;
     setIsHovering(false);
   };
   return (
@@ -108,13 +153,16 @@ export default function Button(props) {
         color: computedContentColor(),
         boxShadow: computedBoxShadow(),
         border: computedBorder(),
-        borderRadius:computedBorderRadius(),
+        borderRadius: computedBorderRadius(),
       }}
       onClick={handleClick}
       onMouseEnter={handleHoverEnter}
       onMouseLeave={handleHoverLeave}
     >
-      {props.children}
+      <Content style={{ opacity: computedContentOpacity() }}>
+        {props.children}
+      </Content>
+      {props.loading && <LoadingEffect size={20}></LoadingEffect>}
     </ButtonComponent>
   );
 }
@@ -124,16 +172,19 @@ Button.propTypes = {
   elevation: PropTypes.number,
   color: PropTypes.string,
   disabled: PropTypes.bool,
+  loading: PropTypes.bool, //render LoadingEffect not content if true
   depressed: PropTypes.bool, //no box-shadow if true
   tile: PropTypes.bool, //no border-radius if true
   rounded: PropTypes.bool, //round edges if true
   width: PropTypes.number,
   height: PropTypes.number,
+  onClick: PropTypes.func,
 };
 Button.defaultProps = {
   variant: "plain",
   size: "md",
   disabled: false,
+  loading: false,
   depressed: false,
   tile: false,
   rounded: false,

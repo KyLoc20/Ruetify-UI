@@ -2,7 +2,9 @@ import * as React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import clsx from "clsx";
+//todo use transform: scale(1.2) to set the size
 const Component = styled("div")`
+  transform: scale(1.2);
   svg {
     stroke-dasharray: 100 2000; //v1 is dash length v2 is space length(v2>=circle length=>only 1 dash)
   }
@@ -40,7 +42,7 @@ const Component = styled("div")`
 `;
 export default function CircularAnimation(props) {
   const computedSize = () => {
-    return {width:`${props.size}px`,height:`${props.size}px`,}
+    return { width: `${props.size}px`, height: `${props.size}px` };
   };
   const computedStrokeShape = () => {
     if (props.determinate) {
@@ -52,22 +54,22 @@ export default function CircularAnimation(props) {
     else return "100 2000";
   };
   return (
-    <Component className="circular-animation" style={{...computedSize()}}>
+    <Component className="circular-animation" style={{ ...computedSize() }}>
       <svg
-        viewBox="22 22 44 44"
+        viewBox="0 0 60 60"
         className={clsx([props.determinate ? "outer-static" : "outer-animate"])}
       >
         <circle
           className={clsx([
             props.determinate ? "inner-static" : "inner-animate",
           ])}
-          cx={44}
-          cy={44}
+          cx={30}
+          cy={30}
           r={props.size}
           fill="none"
           stroke={props.color}
-          stroke-width={props.strokeWidth}
-          stroke-dasharray={computedStrokeShape()}
+          strokeWidth={props.strokeWidth}
+          strokeDasharray={computedStrokeShape()}
         ></circle>
       </svg>
     </Component>

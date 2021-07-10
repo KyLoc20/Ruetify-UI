@@ -1,9 +1,15 @@
 import App from "../components/App";
+import * as React from "react";
 import Typography from "../ui/Typography/Typography";
 import { GroupRow, GroupBox } from "../ui/layout/Group";
 import CircularAnimation from "../ui/effect/CircularAnimation";
 import Button from "../ui/Button/Button";
 export default function Home() {
+  const [isLoading, setIsLoading] = React.useState(false);
+  const handleChangeLoading = () => {
+    setIsLoading((prevValue) => !prevValue);
+    console.log("handleChangeLoading", isLoading);
+  };
   return (
     <App>
       <Typography type="h1">Buttons</Typography>
@@ -22,7 +28,7 @@ export default function Home() {
       </Typography>
       <GroupBox>
         <Button variant="plain" color="default">
-        <CircularAnimation determinate progress={65}></CircularAnimation>
+          <CircularAnimation determinate progress={65}></CircularAnimation>
         </Button>
         <Button variant="plain" color="primary">
           PRIMARY
@@ -191,6 +197,32 @@ export default function Home() {
         <Button variant="plain" disabled rounded>
           DISABLED
         </Button>
+      </GroupBox>
+      <Typography type="h2">Loading</Typography>
+      <Typography type="p">
+        Use the prop <code>loading</code> to notify a user that there is
+        processing taking place.
+      </Typography>
+      <GroupBox block>
+        <GroupRow justifyContent="start" width={500}>
+          <Button variant="plain" color="primary" onClick={handleChangeLoading}>
+            {isLoading ? "FINISHED" : "LOADING "}
+          </Button>
+        </GroupRow>
+        <GroupRow justifyContent="start" width={500}>
+          <Button variant="outlined" color="primary" loading={isLoading}>
+            SUBMIT
+          </Button>
+          <Button variant="outlined" color="primary" loading={isLoading}>
+            FETCH
+          </Button>
+          <Button variant="plain" color="primary" loading={isLoading}>
+            SEND
+          </Button>
+          <Button variant="plain" color="error" loading={isLoading}>
+            SAVE
+          </Button>
+        </GroupRow>
       </GroupBox>
       <GroupBox></GroupBox>
     </App>
