@@ -43,7 +43,7 @@ const getDrawerItems = () => [
               link: "autocomplete🚧",
             },
           },
-          { content: { label: "button", text: "Button🚧", link: "button" } },
+          { content: { label: "button", text: "Button⚡", link: "button" } },
           {
             content: {
               label: "checkbox",
@@ -134,7 +134,7 @@ export default function PageContainer(props) {
       </Head>
       <LeftContainer>
         <NavigationContext>
-          <AppDetail version="v0.1.0"></AppDetail>
+          <AppDetail version="v0.2.1"></AppDetail>
           <NavigationCatalog
             items={getDrawerItems()}
             layerTotal={3}
