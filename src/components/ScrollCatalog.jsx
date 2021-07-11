@@ -34,7 +34,8 @@ const Item = styled("li")`
   letter-spacing: 0.0178571429em !important;
   cursor: pointer;
   user-select: none;
-  transition: border 100ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: border 100ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 100ms cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover {
     border-color: rgba(24, 103, 192, 0.54);
@@ -45,7 +46,7 @@ const Item = styled("li")`
     color: rgba(24, 103, 192, 1);
   }
 `;
-function locateWhenScrolling(oAnchors){
+function locateWhenScrolling(oAnchors) {
   let closestOne = null;
   let minDistance = Number.MAX_SAFE_INTEGER;
   for (let item of oAnchors) {
@@ -63,20 +64,33 @@ function locateWhenScrolling(oAnchors){
       continue;
     }
   }
-  console.log("locateWhenScrolling", closestOne?.anchor, minDistance);
   return closestOne ? closestOne.anchor : null;
 }
 export default function ScrollCatalog(props) {
-  const [throttleTimer,setThrotteTimer]=React.useState(null)
-  const [activeAnchor,setActiveAnchor]=React.useState(null)
-  const handleScroll=()=>{
-    if(throttleTimer)return
-    setThrotteTimer(setTimeout(() => {
-      setThrotteTimer(null)
-      setActiveAnchor(locateWhenScrolling(props.anchors))
-      console.log("activeAnchor: ", activeAnchor);
-    }, 100))
-  }
+  const [throttleTimer, setThrotteTimer] = React.useState(null);
+  const [activeAnchor, setActiveAnchor] = React.useState(null);
+  const handleScroll = () => {
+    if (throttleTimer) return;
+    setThrotteTimer(
+      setTimeout(() => {
+        setThrotteTimer(null);
+        setActiveAnchor(locateWhenScrolling(props.anchors));
+      }, 200)
+    );
+  };
+  const handleSelect = (anchor) => {
+    setActiveAnchor(anchor);
+    const offsetTopForAppBar = 70; //AppBar
+    const el = document.getElementById(anchor);
+    if (el) {
+      const calcTop =
+        el.getBoundingClientRect().top +
+        document.documentElement.scrollTop -
+        offsetTopForAppBar;
+      window.scrollTo({ top: calcTop });
+    }
+  };
+
   React.useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -88,14 +102,20 @@ export default function ScrollCatalog(props) {
       <Title>{props.title}</Title>
       <ItemContainer>
         {props.anchors.map((item, idx) => (
-          <Item key={idx} className={activeAnchor === item.anchor ? 'active' : 'inactive'}>{item.text}</Item>
+          <Item
+            key={idx}
+            className={activeAnchor === item.anchor ? "active" : "inactive"}
+            onClick={handleSelect.bind(null, item.anchor)}
+          >
+            {item.text}
+          </Item>
         ))}
       </ItemContainer>
     </Component>
   );
 }
 ScrollCatalog.propTypes = {
-  routePath: PropTypes.string.isRequired,//'component/avatar'
+  routePath: PropTypes.string.isRequired, //'component/avatar'
   anchors: PropTypes.arrayOf(
     PropTypes.shape({
       anchor: PropTypes.string,

@@ -6,7 +6,7 @@ import AppDetail from "./AppDetail";
 import NavigationCatalog from "./NavigationCatalog";
 import AppBar from "./AppBar";
 import MainContext from "./MainContext";
-import ContentCatalog from "./ContentCatalog";
+import ContentNavigation from "./ContentNavigation";
 const Container = styled("section")`
   display: flex;
   position: relative;
@@ -147,7 +147,7 @@ export default function PageContainer(props) {
       <RightContainer>
         <AppBar></AppBar>
         <MainContext>{props.children}</MainContext>
-        <ContentCatalog></ContentCatalog>
+        <ContentNavigation></ContentNavigation>
       </RightContainer>
     </Container>
   );

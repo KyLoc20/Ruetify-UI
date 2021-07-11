@@ -18,6 +18,7 @@ const ButtonDefaultRemoval = styled("button")`
 `;
 const ButtonComponent = styled(ButtonDefaultRemoval)`
   display: inline-flex;
+  flex-shrink: 0;
   position: relative;
   align-items: center;
   justify-content: center;
@@ -67,7 +68,6 @@ LoadingEffect.propTypes = {
   indicator: PropTypes.string, //text effect content
 };
 export default function Button(props) {
-  console.log("update", props.loading);
   const [isHovering, setIsHovering] = React.useState(false);
   const computedClasses = () =>
     clsx([

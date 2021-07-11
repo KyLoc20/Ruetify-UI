@@ -14,6 +14,7 @@ const Component = styled("section")`
   border-bottom: solid 1px rgba(0, 0, 0, 0.12);
   overflow: hidden;
   background: #fff;
+  z-index:100;
 `;
 const Spacing = styled("div")`
   flex: 1;

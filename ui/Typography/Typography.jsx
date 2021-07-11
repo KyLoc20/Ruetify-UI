@@ -77,6 +77,7 @@ export default function Typography(props) {
   const TypographyComponent = TypeMap[props.type] || Paragraph;
   return (
     <TypographyComponent
+      id={props.id}
       className={props.type}
       css={[props.description ? DescriptionStyle : null, CodeStyle]}
     >
@@ -85,6 +86,7 @@ export default function Typography(props) {
   );
 }
 Typography.propTypes = {
+  id: PropTypes.string,
   type: PropTypes.oneOf(["h1", "h2", "h3", "h4", "p", "quote"]),
   description: PropTypes.bool, // a special style
 };
