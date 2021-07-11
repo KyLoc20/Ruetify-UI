@@ -45,21 +45,58 @@ const Item = styled("li")`
     color: rgba(24, 103, 192, 1);
   }
 `;
+function locateWhenScrolling(oAnchors){
+  let closestOne = null;
+  let minDistance = Number.MAX_SAFE_INTEGER;
+  for (let item of oAnchors) {
+    let el = document.getElementById(item.anchor);
+    if (el) {
+      let top = el.getBoundingClientRect().top;
+      //its negative if the el is above the viewport
+      if (top > 0 && top < minDistance) {
+        closestOne = item;
+        minDistance = top;
+      } else {
+        continue;
+      }
+    } else {
+      continue;
+    }
+  }
+  console.log("locateWhenScrolling", closestOne?.anchor, minDistance);
+  return closestOne ? closestOne.anchor : null;
+}
 export default function ScrollCatalog(props) {
+  const [throttleTimer,setThrotteTimer]=React.useState(null)
+  const [activeAnchor,setActiveAnchor]=React.useState(null)
+  const handleScroll=()=>{
+    if(throttleTimer)return
+    setThrotteTimer(setTimeout(() => {
+      setThrotteTimer(null)
+      setActiveAnchor(locateWhenScrolling(props.anchors))
+      console.log("activeAnchor: ", activeAnchor);
+    }, 100))
+  }
+  React.useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   return (
     <Component className="scroll-catalog">
       <Title>{props.title}</Title>
       <ItemContainer>
-        {props.items.map((item, idx) => (
-          <Item key={idx}>{item.text}</Item>
+        {props.anchors.map((item, idx) => (
+          <Item key={idx} className={activeAnchor === item.anchor ? 'active' : 'inactive'}>{item.text}</Item>
         ))}
       </ItemContainer>
     </Component>
   );
 }
 ScrollCatalog.propTypes = {
-  path: PropTypes.string.isRequired, //'component/avatar'
-  items: PropTypes.arrayOf(
+  routePath: PropTypes.string.isRequired,//'component/avatar'
+  anchors: PropTypes.arrayOf(
     PropTypes.shape({
       anchor: PropTypes.string,
       text: PropTypes.string,

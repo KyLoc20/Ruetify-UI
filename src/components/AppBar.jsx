@@ -1,6 +1,7 @@
 import * as React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
+import Icon from "../../ui/Icon/Icon";
 const Component = styled("section")`
   position: fixed;
   display: flex;
@@ -12,7 +13,7 @@ const Component = styled("section")`
   height: 64px;
   border-bottom: solid 1px rgba(0, 0, 0, 0.12);
   overflow: hidden;
-  background:#fff;
+  background: #fff;
 `;
 const Spacing = styled("div")`
   flex: 1;
@@ -190,7 +191,6 @@ Button.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
 };
-import Icon from "../ui/Icon/Icon";
 const IconButtonComponent = styled(ButtonDefaultRemoval)`
   display: flex;
   flex-shrink: 0;

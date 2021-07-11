@@ -7,7 +7,7 @@ import NavigationCatalog from "./NavigationCatalog";
 import AppBar from "./AppBar";
 import MainContext from "./MainContext";
 import ContentCatalog from "./ContentCatalog";
-const Page = styled("section")`
+const Container = styled("section")`
   display: flex;
   position: relative;
 `;
@@ -116,7 +116,7 @@ const getDrawerItems = () => [
     children: [],
   },
 ];
-export default function AppContainer(props) {
+export default function PageContainer(props) {
   const [selectedNavigation, setSelectedNavigation] =
     React.useState("autocomplete");
   const handleSelectFromCatalog = (where) => {
@@ -127,7 +127,7 @@ export default function AppContainer(props) {
     }
   };
   return (
-    <Page>
+    <Container>
       <Head>
         <title>Ruetify-UI</title>
         <link rel="icon" href="/favicon.ico" />
@@ -149,6 +149,6 @@ export default function AppContainer(props) {
         <MainContext>{props.children}</MainContext>
         <ContentCatalog></ContentCatalog>
       </RightContainer>
-    </Page>
+    </Container>
   );
 }

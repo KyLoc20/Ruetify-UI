@@ -1,8 +1,7 @@
-import App from "../components/App";
 import * as React from "react";
 import Typography from "../ui/Typography/Typography";
+import Page from "../src/components/Page";
 import { GroupRow, GroupBox } from "../ui/layout/Group";
-import CircularAnimation from "../ui/effect/CircularAnimation";
 import Button from "../ui/Button/Button";
 export default function Home() {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -11,7 +10,7 @@ export default function Home() {
     console.log("handleChangeLoading", isLoading);
   };
   return (
-    <App>
+    <Page>
       <Typography type="h1">Buttons</Typography>
       <Typography type="p" description>
         The <code>Button</code> component replaces the standard html button with
@@ -28,7 +27,7 @@ export default function Home() {
       </Typography>
       <GroupBox>
         <Button variant="plain" color="default">
-          <CircularAnimation determinate progress={65}></CircularAnimation>
+          DEFAULT
         </Button>
         <Button variant="plain" color="primary">
           PRIMARY
@@ -224,7 +223,6 @@ export default function Home() {
           </Button>
         </GroupRow>
       </GroupBox>
-      <GroupBox></GroupBox>
-    </App>
+    </Page>
   );
 }
