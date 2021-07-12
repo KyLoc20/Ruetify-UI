@@ -69,25 +69,28 @@ LoadingEffect.propTypes = {
 };
 export default function Button(props) {
   const [isHovering, setIsHovering] = React.useState(false);
-  const computedClasses = () =>
-    clsx([
-      "btn",
-      props.disabled && "disabled",
-      props.loading && "loading",
-      props.variant,
-    ]);
-  const computedBoxShadow = () => {
+  const computedClasses = React.useMemo(
+    () =>
+      clsx([
+        "btn",
+        props.disabled && "disabled",
+        props.loading && "loading",
+        props.variant,
+      ]),
+    [props.variant, props.loading, props.disabled]
+  );
+  const computedBoxShadow = React.useMemo(() => {
     if (props.variant === "plain" && !props.disabled && !props.depressed)
       return "0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12)";
     else return null;
-  };
-  const computedSize = () => {
+  }, [props.variant, props.disabled, props.depressed]);
+  const computedSize = React.useMemo(() => {
     const sizeStyles = getSize(props.size);
     if (props.height) sizeStyles["height"] = `${props.height}px`;
     if (props.width) sizeStyles["width"] = `${props.width}px`;
     return sizeStyles;
-  };
-  const computedBorder = () => {
+  }, [props.size, props.height, props.width]);
+  const computedBorder = React.useMemo(() => {
     //only for outlined
     if (props.variant === "outlined")
       if (props.disabled)
@@ -100,16 +103,23 @@ export default function Button(props) {
             : props.border || getColor(props.color, props.variant, "border")
         }`;
     else return null;
-  };
-  const computedBorderRadius = () => {
+  }, [
+    isHovering,
+    props.variant,
+    props.disabled,
+    props.hoverBorder,
+    props.color,
+    props.border,
+  ]);
+  const computedBorderRadius = React.useMemo(() => {
     if (props.tile) return null;
     else if (props.rounded)
       return props.height
         ? `${props.height / 2}px`
         : getSize(props.size)["height"];
     else return `4px`;
-  };
-  const computedBackgroundColor = () => {
+  }, [props.tile, props.rounded, props.height, props.size]);
+  const computedBackgroundColor = React.useMemo(() => {
     if (props.disabled) return getColor("disabled", props.variant, "main");
     if (isHovering)
       return (
@@ -120,20 +130,27 @@ export default function Button(props) {
       return (
         props.backgroundColor || getColor(props.color, props.variant, "main")
       );
-  };
-  const computedContentColor = () => {
+  }, [
+    props.disabled,
+    props.variant,
+    isHovering,
+    props.hoverBackgroundColor,
+    props.color,
+    props.backgroundColor,
+  ]);
+  const computedContentColor = React.useMemo(() => {
     if (props.disabled) return getColor("disabled", props.variant, "text");
     return props.contentColor || getColor(props.color, props.variant, "text");
-  };
-  const computedRippleColor = () => {
+  }, [props.disabled, props.variant, props.contentColor, props.color]);
+  const computedRippleColor = React.useMemo(() => {
     return props.rippleColor || getColor(props.color, props.variant, "ripple");
-  };
-  const computedContentOpacity = () => {
+  }, [props.rippleColor, props.color, props.variant]);
+  const computedContentOpacity = React.useMemo(() => {
     return props.loading ? 0 : 1;
-  };
+  }, [props.loading]);
   const handleClick = (e) => {
     if (props.disabled || props.loading) return;
-    createRippleByAddingLayer(e, false, computedRippleColor());
+    createRippleByAddingLayer(e, false, computedRippleColor);
     props.onClick?.(e);
   };
   const handleHoverEnter = () => {
@@ -146,20 +163,20 @@ export default function Button(props) {
   };
   return (
     <ButtonComponent
-      className={computedClasses()}
+      className={computedClasses}
       style={{
-        ...computedSize(),
-        background: computedBackgroundColor(),
-        color: computedContentColor(),
-        boxShadow: computedBoxShadow(),
-        border: computedBorder(),
-        borderRadius: computedBorderRadius(),
+        ...computedSize,
+        background: computedBackgroundColor,
+        color: computedContentColor,
+        boxShadow: computedBoxShadow,
+        border: computedBorder,
+        borderRadius: computedBorderRadius,
       }}
       onClick={handleClick}
       onMouseEnter={handleHoverEnter}
       onMouseLeave={handleHoverLeave}
     >
-      <Content style={{ opacity: computedContentOpacity() }}>
+      <Content style={{ opacity: computedContentOpacity }}>
         {props.children}
       </Content>
       {props.loading && <LoadingEffect size={20}></LoadingEffect>}
