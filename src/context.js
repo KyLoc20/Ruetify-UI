@@ -18,6 +18,7 @@ const CheckboxPageContent = {
         { anchor: "ac-basic-checkboxes", text: "Basic checkboxes" },
         { anchor: "ac-label", text: "Label" },
         { anchor: "ac-size", text: "Size" },
+        { anchor: "ac-color", text: "Color" },
         { anchor: "ac-controlled", text: "Controlled" },
         { anchor: "ac-icon", text: "Icon" },
         { anchor: "ac-label-placement", text: "Label placement" },
