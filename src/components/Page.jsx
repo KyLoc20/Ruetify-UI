@@ -1,4 +1,4 @@
-import { css, jsx } from "@emotion/react";
+import { useRouter } from "next/router";
 import Head from "next/head";
 import styled from "@emotion/styled";
 import React, { useState, useEffect } from "react";
@@ -13,7 +13,7 @@ const Container = styled("section")`
 `;
 const LeftContainer = styled("section")`
   position: relative;
-  flex-shrink:0;
+  flex-shrink: 0;
   width: 300px;
   height: 100vh;
 `;
@@ -40,14 +40,13 @@ const getDrawerItems = () => [
             content: {
               label: "autocomplete🚧",
               text: "Autocomplete🚧",
-              link: "autocomplete🚧",
             },
           },
           { content: { label: "button", text: "Button⚡", link: "button" } },
           {
             content: {
               label: "checkbox",
-              text: "Checkbox🚧",
+              text: "Checkbox⚡",
               link: "checkbox",
             },
           },
@@ -55,19 +54,17 @@ const getDrawerItems = () => [
             content: {
               label: "float-action-button",
               text: "Float Action Button🚧",
-              link: "float-action-button",
             },
           },
           {
             content: {
               label: "radio",
               text: "Radio Button🚧",
-              link: "radio-button",
             },
           },
-          { content: { label: "rating", text: "Rating🚧", link: "rating" } },
-          { content: { label: "select", text: "Select🚧", link: "select" } },
-          { content: { label: "slider", text: "Slider🚧", link: "slider" } },
+          { content: { label: "rating", text: "Rating🚧" } },
+          { content: { label: "select", text: "Select🚧" } },
+          { content: { label: "slider", text: "Slider🚧" } },
           { content: { label: "textfield", text: "Text Field🚧" } },
         ],
       },
@@ -83,7 +80,7 @@ const getDrawerItems = () => [
           { content: { label: "breadcrumbs", text: "Breadcrumbs🚧" } },
           { content: { label: "drawer", text: "Drawer🚧" } },
           { content: { label: "menu", text: "Menu🚧" } },
-          { content: { label: "stepper", text: "Stepper🚧", link: "stepper" } },
+          { content: { label: "stepper", text: "Stepper🚧" } },
           { content: { label: "tabs", text: "Tabs🚧" } },
         ],
       },
@@ -91,7 +88,7 @@ const getDrawerItems = () => [
         content: { label: "surfaces", text: "Surfaces" },
         children: [
           { content: { label: "app-bar", text: "App Bar🚧" } },
-          { content: { label: "card", text: "Card🚧", link: "card" } },
+          { content: { label: "card", text: "Card🚧" } },
         ],
       },
       {
@@ -104,9 +101,9 @@ const getDrawerItems = () => [
       {
         content: { label: "data-display", text: "Data Display" },
         children: [
-          { content: { label: "avatar", text: "Avatar🚧", link: "avatar" } },
+          { content: { label: "avatar", text: "Avatar🚧" } },
           { content: { label: "badge", text: "Badge🚧" } },
-          { content: { label: "chip", text: "Chip🚧", link: "chip" } },
+          { content: { label: "chip", text: "Chip🚧" } },
         ],
       },
     ],
@@ -117,6 +114,7 @@ const getDrawerItems = () => [
   },
 ];
 export default function PageContainer(props) {
+  const router = useRouter();
   const [selectedNavigation, setSelectedNavigation] =
     React.useState("autocomplete");
   const handleSelectFromCatalog = (where) => {
@@ -124,6 +122,7 @@ export default function PageContainer(props) {
     let link = where.link;
     if (link) {
       setSelectedNavigation(where.label);
+      router.push(`/components/${link}`);
     }
   };
   return (
@@ -134,7 +133,7 @@ export default function PageContainer(props) {
       </Head>
       <LeftContainer>
         <NavigationContext>
-          <AppDetail version="v0.2.1"></AppDetail>
+          <AppDetail version="v0.3.0"></AppDetail>
           <NavigationCatalog
             items={getDrawerItems()}
             layerTotal={3}
