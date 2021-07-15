@@ -47,7 +47,26 @@ export default function CheckboxPage() {
         <Typography type="h2" id="ac-size">
           Size
         </Typography>
-        <GroupBox></GroupBox>
+        <Typography type="p">
+          Use the <code>size</code> prop to set the size of the componnent.
+        </Typography>
+        <GroupBox>
+          <Checkbox size="sm" label="sm"></Checkbox>
+          <Checkbox size="md" label="md"></Checkbox>
+          <Checkbox size="lg" label="lg"></Checkbox>
+          <Checkbox size={48} label="48px"></Checkbox>
+        </GroupBox>
+        <Typography type="quote">
+          By default the icon is (16px) smaller than the corresponding checkbox.
+        </Typography>
+        <Typography type="p">
+          Use the <code>iconSize</code> prop to set the size of the icon inside.
+        </Typography>
+        <GroupBox>
+          <Checkbox size="md" iconSize={20} label="20px"></Checkbox>
+          <Checkbox size="md" label="md"></Checkbox>
+          <Checkbox size="md" iconSize={30} label="30px"></Checkbox>
+        </GroupBox>
 
         <Typography type="h2" id="ac-color">
           Color

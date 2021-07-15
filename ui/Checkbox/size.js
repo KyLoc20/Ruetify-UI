@@ -5,7 +5,7 @@ const SizeMap = {
 };
 
 function getSize(size, type) {
-    if (typeof size === "number") return size
+    if (typeof size === "number") return type === "icon" ? size - 16 : size // icon is smaller than checkbox
     const sizeSet = SizeMap[size] || SizeMap["md"];
     return sizeSet[type]
 }
