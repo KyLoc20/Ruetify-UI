@@ -30,7 +30,13 @@ export default function CheckboxPage() {
         <Typography type="h2" id="ac-label">
           Label
         </Typography>
-        <GroupBox></GroupBox>
+        <Typography type="p">
+          You can add a description text to the <code>label</code> prop.
+        </Typography>
+        <GroupBox>
+          <Checkbox label="Label"></Checkbox>
+          <Checkbox label="Disabled" disabled></Checkbox>
+        </GroupBox>
 
         <Typography type="h2" id="ac-size">
           Size

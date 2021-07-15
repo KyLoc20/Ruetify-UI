@@ -21,6 +21,11 @@ const IconWrapper = styled("div")`
 `;
 const LabelWrapper = styled("div")`
   display: flex;
+  font-size: 16px;
+  line-height: 20px;
+  user-select: none;
+  justify-content: center;
+  align-items: center;
 `;
 export default function Checkbox(props) {
   const [isHovering, setIsHovering] = React.useState(false);
@@ -66,6 +71,9 @@ export default function Checkbox(props) {
   const computedRippleColor = React.useMemo(() => {
     return props.rippleColor || getColor(props.color, "ripple");
   }, [props.rippleColor, props.color]);
+  const computedLabelTextColor = React.useMemo(() => {
+    return props.disabled ? "rgba(0, 0, 0, 0.38)" : "rgba(0, 0, 0, 0.6)";
+  }, [props.disabled]);
   const handleClickIcon = (e) => {
     if (props.disabled) return;
     createRipple(e, true, computedRippleColor);
@@ -95,7 +103,9 @@ export default function Checkbox(props) {
       >
         <Icon name={computedIcon} size={computedIconSize}></Icon>
       </IconWrapper>
-      <LabelWrapper></LabelWrapper>
+      <LabelWrapper style={{ color: computedLabelTextColor }}>
+        {props.label}
+      </LabelWrapper>
     </CheckboxComponent>
   );
 }
