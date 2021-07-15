@@ -187,7 +187,7 @@ Button.propTypes = {
   variant: PropTypes.oneOf(["plain", "text", "outlined"]).isRequired,
   size: PropTypes.oneOf(["auto", "xsm", "sm", "md", "lg", "xlg"]),
   elevation: PropTypes.number,
-  color: PropTypes.string,
+  color: PropTypes.oneOf(["default", "primary", "error"]), //color theme
   disabled: PropTypes.bool,
   loading: PropTypes.bool, //render LoadingEffect not content if true
   depressed: PropTypes.bool, //no box-shadow if true
