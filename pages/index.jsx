@@ -1,9 +1,9 @@
 import * as React from "react";
-import Page from "../../../src/components/Page";
-import Typography from "../../../ui/Typography/Typography";
-import { GroupRow, GroupBox } from "../../../ui/layout/Group";
-import Button from "../../../ui/Button/Button";
-import { PageContentNavigationContext, ButtonPageContent } from "../../../src/context";
+import Page from "../src/components/Page";
+import Typography from "../ui/Typography/Typography";
+import { GroupRow, GroupBox } from "../ui/layout/Group";
+import Button from "../ui/Button/Button";
+import { PageContentNavigationContext, ButtonPageContent } from "../src/context";
 export default function ButtonPage() {
   const [isLoading, setIsLoading] = React.useState(false);
   const handleChangeLoading = () => {
