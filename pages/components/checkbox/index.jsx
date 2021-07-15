@@ -162,7 +162,28 @@ export default function CheckboxPage() {
         <Typography type="h2" id="ac-label-placement">
           Label placement
         </Typography>
-        <GroupBox></GroupBox>
+        <Typography type="p">
+          Use the prop <code>labelPlacement</code> to change the placement of
+          the label.
+        </Typography>
+        <GroupBox>
+          <Checkbox color="primary" labelPlacement="top" label="Top"></Checkbox>
+          <Checkbox
+            color="primary"
+            labelPlacement="left"
+            label="Left"
+          ></Checkbox>
+          <Checkbox
+            color="primary"
+            labelPlacement="bottom"
+            label="Bottom"
+          ></Checkbox>
+          <Checkbox
+            color="primary"
+            labelPlacement="right"
+            label="Right"
+          ></Checkbox>
+        </GroupBox>
       </Page>
     </PageContentNavigationContext.Provider>
   );

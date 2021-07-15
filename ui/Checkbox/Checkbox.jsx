@@ -9,6 +9,7 @@ import { getSize } from "./size";
 const CheckboxComponent = styled("div")`
   display: inline-flex;
   cursor: pointer;
+  align-items: center;
   &.disabled {
     cursor: default;
   }
@@ -27,6 +28,12 @@ const LabelWrapper = styled("div")`
   justify-content: center;
   align-items: center;
 `;
+const FlexDirectionMap = {
+  left: "row",
+  right: "row-reverse",
+  top: "column-reverse",
+  bottom: "column",
+};
 export default function Checkbox(props) {
   const [isHovering, setIsHovering] = React.useState(false);
   const [isChecked, setIsChecked] = React.useState(props.checked);
@@ -38,7 +45,8 @@ export default function Checkbox(props) {
       clsx(
         "checkbox",
         props.disabled && "disabled",
-        props.checked && "checked"
+        props.checked && "checked",
+        `label-${props.labelPlacement}`
       ),
     [props.disabled, props.checked]
   );
@@ -77,6 +85,9 @@ export default function Checkbox(props) {
   const computedLabelTextColor = React.useMemo(() => {
     return props.disabled ? "rgba(0, 0, 0, 0.38)" : "rgba(0, 0, 0, 0.6)";
   }, [props.disabled]);
+  const computedFlexPosition = React.useMemo(() => {
+    return { flexDirection: FlexDirectionMap[props.labelPlacement] || "row" };
+  }, [props.labelPlacement]);
   const handleClickIcon = (e) => {
     if (props.disabled) return;
     createRipple(e, true, computedRippleColor);
@@ -102,7 +113,10 @@ export default function Checkbox(props) {
     setIsHovering(false);
   };
   return (
-    <CheckboxComponent className={computedClasses}>
+    <CheckboxComponent
+      className={computedClasses}
+      style={{ ...computedFlexPosition }}
+    >
       <IconWrapper
         style={{
           height: computedIconWrapperSize,
@@ -158,4 +172,5 @@ Checkbox.defaultProps = {
   size: "md",
   disabled: false,
   checked: false,
+  labelPlacement: "right",
 };
