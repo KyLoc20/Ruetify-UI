@@ -29,8 +29,8 @@ const LabelWrapper = styled("div")`
   align-items: center;
 `;
 const FlexDirectionMap = {
-  left: "row",
-  right: "row-reverse",
+  left: "row-reverse",
+  right: "row",
   top: "column-reverse",
   bottom: "column",
 };
@@ -141,7 +141,10 @@ export default function Checkbox(props) {
 }
 Checkbox.propTypes = {
   label: PropTypes.string,
-  size: PropTypes.oneOf(["sm", "md", "lg", PropTypes.number]), //the size of checkbox, the size of icon inside is smaller than it automatically
+  size: PropTypes.oneOfType([
+    PropTypes.oneOf(["sm", "md", "lg"]),
+    PropTypes.number,
+  ]), //the size of checkbox, the size of icon inside is smaller than it automatically
   color: PropTypes.oneOf([
     "default",
     "primary",
