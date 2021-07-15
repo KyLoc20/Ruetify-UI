@@ -30,6 +30,9 @@ const LabelWrapper = styled("div")`
 export default function Checkbox(props) {
   const [isHovering, setIsHovering] = React.useState(false);
   const [isChecked, setIsChecked] = React.useState(props.checked);
+  React.useEffect(() => {
+    props.onChange?.({ value: isChecked });
+  }, [isChecked]);
   const computedClasses = React.useMemo(
     () =>
       clsx(
@@ -77,8 +80,18 @@ export default function Checkbox(props) {
   const handleClickIcon = (e) => {
     if (props.disabled) return;
     createRipple(e, true, computedRippleColor);
-    setIsChecked((prevValue) => !prevValue);
-    // props.onClick?.(e);
+    setIsChecked((prevValue) => {
+      //todo this will cause a warning: cannot update a component while rendering a different component to locate the bad setstate()
+      //you should call it in the useEffect(), no side-effect here
+      // props.onChange?.({ value: isChecked });
+      return !prevValue;
+    });
+  };
+  const handleClickLabel = () => {
+    if (props.disabled) return;
+    setIsChecked((prevValue) => {
+      return !prevValue;
+    });
   };
   const handleHoverEnter = () => {
     if (props.disabled) return;
@@ -103,7 +116,10 @@ export default function Checkbox(props) {
       >
         <Icon name={computedIcon} size={computedIconSize}></Icon>
       </IconWrapper>
-      <LabelWrapper style={{ color: computedLabelTextColor }}>
+      <LabelWrapper
+        style={{ color: computedLabelTextColor }}
+        onMouseDown={handleClickLabel}
+      >
         {props.label}
       </LabelWrapper>
     </CheckboxComponent>

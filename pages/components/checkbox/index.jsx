@@ -8,6 +8,12 @@ import {
   CheckboxPageContent,
 } from "../../../src/context";
 export default function CheckboxPage() {
+  const [controlled, setControlled] = React.useState(true);
+  const controlledLabel = React.useMemo(
+    () => (controlled ? "This one is Checked" : "This one is Unchecked"),
+    [controlled]
+  );
+  const handleCheckboxChange = (e) => setControlled(e.value);
   return (
     <PageContentNavigationContext.Provider value={{ ...CheckboxPageContent }}>
       <Page>
@@ -51,7 +57,17 @@ export default function CheckboxPage() {
         <Typography type="h2" id="ac-controlled">
           Controlled
         </Typography>
-        <GroupBox></GroupBox>
+        <Typography type="p">
+          You can control the checkbox with the <code>checked</code> and{" "}
+          <code>onChange</code> props.
+        </Typography>
+        <GroupBox>
+          <Checkbox
+            label={controlledLabel}
+            checked={controlled}
+            onChange={handleCheckboxChange}
+          ></Checkbox>
+        </GroupBox>
 
         <Typography type="h2" id="ac-icon">
           Icon
