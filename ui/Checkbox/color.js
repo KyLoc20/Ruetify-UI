@@ -7,27 +7,27 @@ const ColorThemeMap = {
     primary: {
         checked: [24, 103, 192, 1],
         hover: [24, 103, 192, 0.2],
-        ripple: [0, 0, 0, 0.3],
+        ripple: [24, 103, 192, 0.3],
     },
     success: {
         checked: [76, 175, 80, 1],
         hover: [76, 175, 80, 0.2],
-        ripple: [0, 0, 0, 0.3],
+        ripple: [76, 175, 80, 0.3],
     },
     info: {
         checked: [33, 150, 243, 1],
         hover: [33, 150, 243, 0.2],
-        ripple: [0, 0, 0, 0.3],
+        ripple: [33, 150, 243, 0.3],
     },
     warning: {
         checked: [251, 140, 0, 1],
         hover: [251, 140, 0, 0.2],
-        ripple: [0, 0, 0, 0.3],
+        ripple: [251, 140, 0, 0.3],
     },
     error: {
         checked: [255, 82, 82, 1],
         hover: [255, 82, 82, 0.2],
-        ripple: [0, 0, 0, 0.3],
+        ripple: [255, 82, 82, 0.3],
     },
 }
 

@@ -1,6 +1,7 @@
 import { css, jsx } from "@emotion/react";
 import styled from "@emotion/styled";
-import React, { useState, useEffect } from "react";
+import clsx from "clsx";
+import * as React from "react";
 import PropTypes from "prop-types";
 import { iconMap, iconList } from "./icons";
 const Component = styled.span`
@@ -10,44 +11,45 @@ const Component = styled.span`
   text-align: center;
   transition: fill, background-color 500ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 `;
-const mapSize = {
+const SizeMap = {
   sm: 20,
   md: 24,
   lg: 36,
 };
 function Icon(props) {
-  const [path, setPath] = useState(() => iconMap[props.name]?.path);
-  const [viewBox, setViewBox] = useState(() => iconMap[props.name]?.viewBox);
-  const getSize = (size) => {
-    if (typeof size === "string") return mapSize[size] || 24;
-    else if (typeof size === "number") return size > 0 ? size : 24;
-    else return 24;
-  };
-  const computedWidth = (sizeNum) => {
-    return { width: `${sizeNum}px` };
-  };
-  const computedHeight = (sizeNum) => {
-    return { height: `${sizeNum}px` };
-  };
+  const computedClasses = React.useMemo(() => clsx("icon"), []);
+  const computedPath = React.useMemo(
+    () => iconMap[props.name]?.path,
+    [props.name]
+  );
+  const computedViewBox = React.useMemo(
+    () => iconMap[props.name]?.viewBox,
+    [props.name]
+  );
+  const computedSize = React.useMemo(() => {
+    if (typeof props.size === "number") return `${props.size}px`;
+    else return `${SizeMap[props.size]}px` || "24px";
+  }, [props.size]);
+
   return (
     <Component
-      className="icon"
+      className={computedClasses}
       css={{
         fill: props.color ? props.color : "currentColor",
-        ...computedWidth(getSize(props.size)),
-        ...computedHeight(getSize(props.size)),
+        width: computedSize,
+        height: computedSize,
       }}
     >
       <svg
         css={{
-          ...computedWidth(getSize(props.size)),
-          ...computedHeight(getSize(props.size)),
+          width: computedSize,
+          height: computedSize,
         }}
         focusable="false"
         aria-hidden="true"
-        viewBox={viewBox}
+        viewBox={computedViewBox}
       >
-        <path d={path}></path>
+        <path d={computedPath}></path>
       </svg>
     </Component>
   );
@@ -79,7 +81,6 @@ Icon.propTypes = {
     }
   },
 };
-
 Icon.defaultProps = {
   name: "unknown",
   size: "md",

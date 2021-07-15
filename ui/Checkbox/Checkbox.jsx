@@ -5,12 +5,19 @@ import clsx from "clsx";
 import Icon from "../Icon/Icon";
 import { createRipple, createRippleByAddingLayer } from "../effect/rippleable";
 import { getColor } from "./color";
-// import { getSize } from "./size";
+import { getSize } from "./size";
 const CheckboxComponent = styled("div")`
   display: inline-flex;
+  cursor: pointer;
+  &.disabled {
+    cursor: default;
+  }
 `;
 const IconWrapper = styled("div")`
   display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
 `;
 const LabelWrapper = styled("div")`
   display: flex;
@@ -28,8 +35,10 @@ export default function Checkbox(props) {
     [props.disabled, props.checked]
   );
   const computedIcon = React.useMemo(() => {
-    if (!isChecked) return props.icon || "emptyBox";
-    else return props.iconChecked || "checkedBox";
+    let icon = isChecked
+      ? props.iconChecked || "checkedBox"
+      : props.icon || "emptyBox";
+    return icon;
   }, [isChecked, props.icon, props.iconChecked]);
   const computedIconColor = React.useMemo(() => {
     if (props.disabled) return "rgba(0, 0, 0, 0.26)";
@@ -42,28 +51,49 @@ export default function Checkbox(props) {
     props.iconDefaultColor,
     props.color,
   ]);
-
-  const handleClick = (e) => {
-    if (props.disabled || props.loading) return;
-    createRippleByAddingLayer(e, false, computedRippleColor);
-    props.onClick?.(e);
+  const computedIconSize = React.useMemo(() => {
+    return props.iconSize || getSize(props.size, "icon");
+  }, [props.size, props.iconSize]);
+  const computedIconWrapperSize = React.useMemo(() => {
+    return getSize(props.size, "checkbox");
+  }, [props.size, props.iconSize]);
+  const computedIconWrapperHaloColor = React.useMemo(() => {
+    if (props.disabled) return null;
+    if (isHovering)
+      return props.iconHoverColor || getColor(props.color, "hover");
+    else return null;
+  }, [isHovering, props.disabled, props.color, props.iconHoverColor]);
+  const computedRippleColor = React.useMemo(() => {
+    return props.rippleColor || getColor(props.color, "ripple");
+  }, [props.rippleColor, props.color]);
+  const handleClickIcon = (e) => {
+    if (props.disabled) return;
+    createRipple(e, true, computedRippleColor);
+    setIsChecked((prevValue) => !prevValue);
+    // props.onClick?.(e);
   };
   const handleHoverEnter = () => {
-    if (props.disabled || props.loading) return;
+    if (props.disabled) return;
     setIsHovering(true);
   };
   const handleHoverLeave = () => {
-    if (props.disabled || props.loading) return;
+    if (props.disabled) return;
     setIsHovering(false);
   };
   return (
     <CheckboxComponent className={computedClasses}>
       <IconWrapper
         style={{
+          height: computedIconWrapperSize,
+          width: computedIconWrapperSize,
           color: computedIconColor,
+          background: computedIconWrapperHaloColor,
         }}
+        onMouseEnter={handleHoverEnter}
+        onMouseLeave={handleHoverLeave}
+        onMouseDown={handleClickIcon}
       >
-        <Icon name={computedIcon}></Icon>
+        <Icon name={computedIcon} size={computedIconSize}></Icon>
       </IconWrapper>
       <LabelWrapper></LabelWrapper>
     </CheckboxComponent>
@@ -91,6 +121,7 @@ Checkbox.propTypes = {
   iconDefaultColor: PropTypes.string, //when unchecked
   iconColor: PropTypes.string, //when checked
   iconHoverColor: PropTypes.string, //halo color
+  rippleColor: PropTypes.string, //halo color
   //size custom
   iconSize: PropTypes.number,
   //label custom
