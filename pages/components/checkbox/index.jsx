@@ -142,7 +142,22 @@ export default function CheckboxPage() {
         <Typography type="h2" id="ac-icon">
           Icon
         </Typography>
-        <GroupBox></GroupBox>
+        <Typography type="p">
+          Use the prop <code>icon</code> and <code>iconChecked</code> to
+          customize the icon inside the component.
+        </Typography>
+        <GroupBox>
+          <Checkbox
+            color="error"
+            icon="favoriteBorder"
+            iconChecked="favoriteFilled"
+          ></Checkbox>
+          <Checkbox
+            color="primary"
+            icon="bookmarkBorder"
+            iconChecked="bookmarkFilled"
+          ></Checkbox>
+        </GroupBox>
 
         <Typography type="h2" id="ac-label-placement">
           Label placement
