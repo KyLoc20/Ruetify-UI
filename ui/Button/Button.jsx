@@ -71,12 +71,12 @@ export default function Button(props) {
   const [isHovering, setIsHovering] = React.useState(false);
   const computedClasses = React.useMemo(
     () =>
-      clsx([
+      clsx(
         "btn",
         props.disabled && "disabled",
         props.loading && "loading",
         props.variant,
-      ]),
+      ),
     [props.variant, props.loading, props.disabled]
   );
   const computedBoxShadow = React.useMemo(() => {

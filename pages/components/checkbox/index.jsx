@@ -20,7 +20,12 @@ export default function CheckboxPage() {
         <Typography type="h2" id="ac-basic-checkboxes">
           Basic checkboxes
         </Typography>
-        <GroupBox></GroupBox>
+        <GroupBox>
+          <Checkbox></Checkbox>
+          <Checkbox checked></Checkbox>
+          <Checkbox disabled></Checkbox>
+          <Checkbox disabled checked></Checkbox>
+        </GroupBox>
 
         <Typography type="h2" id="ac-label">
           Label
