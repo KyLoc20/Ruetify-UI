@@ -71,7 +71,58 @@ export default function CheckboxPage() {
         <Typography type="h2" id="ac-color">
           Color
         </Typography>
-        <GroupBox></GroupBox>
+        <Typography type="p">
+          Use the <code>color</code> prop to set the color of the component.
+        </Typography>
+        <GroupBox block>
+          <GroupRow>
+            <Checkbox color="primary" checked></Checkbox>
+            <Checkbox color="success" checked></Checkbox>
+            <Checkbox color="warning" checked></Checkbox>
+          </GroupRow>
+          <GroupRow>
+            <Checkbox color="info" checked></Checkbox>
+            <Checkbox color="default" checked></Checkbox>
+            <Checkbox color="error" checked></Checkbox>
+          </GroupRow>
+        </GroupBox>
+        <Typography type="p">
+          Use the prop <code>iconDefaultColor</code> to customize the unchecked
+          icon color.
+        </Typography>
+        <GroupBox>
+          <Checkbox
+            color="info"
+            iconDefaultColor={"rgba(255, 82, 82, 1)"}
+          ></Checkbox>
+        </GroupBox>
+        <Typography type="p">
+          Use the prop <code>iconColor</code> to customize the checked icon
+          color.
+        </Typography>
+        <GroupBox>
+          <Checkbox color="info" iconColor={"rgba(255, 82, 82, 1)"}></Checkbox>
+        </GroupBox>
+        <Typography type="p">
+          Use the prop <code>iconHoverColor</code> to customize the checked icon
+          color.
+        </Typography>
+        <GroupBox>
+          <Checkbox
+            color="info"
+            iconHoverColor={"rgba(255, 82, 82, 0.3)"}
+          ></Checkbox>
+        </GroupBox>
+        <Typography type="p">
+          Use the prop <code>rippleColor</code> to customize the checked icon
+          color.
+        </Typography>
+        <GroupBox>
+          <Checkbox
+            color="info"
+            rippleColor={"rgba(255, 82, 82, 0.3)"}
+          ></Checkbox>
+        </GroupBox>
 
         <Typography type="h2" id="ac-controlled">
           Controlled
