@@ -3,7 +3,7 @@ import Page from "../../../src/components/Page";
 import Typography from "../../../ui/Typography/Typography";
 import { GroupRow, GroupBox } from "../../../ui/layout/Group";
 import Button from "../../../ui/Button/Button";
-import { ButtonPageContentContext } from "../../../src/context";
+import { PageContentNavigationContext, ButtonPageContent } from "../../../src/context";
 export default function ButtonPage() {
   const [isLoading, setIsLoading] = React.useState(false);
   const handleChangeLoading = () => {
@@ -11,19 +11,8 @@ export default function ButtonPage() {
     console.log("handleChangeLoading", isLoading);
   };
   return (
-    <ButtonPageContentContext.Provider
-      value={{
-        routePath: "components/button",
-        anchors: [
-          { anchor: "ac-variant", text: "Variant" },
-          { anchor: "ac-color", text: "Color" },
-          { anchor: "ac-size", text: "Size" },
-          { anchor: "ac-depressed", text: "Depressed" },
-          { anchor: "ac-tile", text: "Tile" },
-          { anchor: "ac-rounded", text: "Rounded" },
-          { anchor: "ac-loading", text: "Loading" },
-        ],
-      }}
+    <PageContentNavigationContext.Provider
+      value={{...ButtonPageContent}}
     >
       <Page>
         <Typography type="h1">Buttons</Typography>
@@ -258,6 +247,6 @@ export default function ButtonPage() {
           </GroupRow>
         </GroupBox>
       </Page>
-    </ButtonPageContentContext.Provider>
+    </PageContentNavigationContext.Provider>
   );
 }

@@ -43,7 +43,7 @@ export default function ButtonPage() {
           and fill color.
         </Typography>
         <GroupBox>
-          <Button variant="plain" color="default">
+          <Button variant="plain" color="default" width={500}>
             DEFAULT
           </Button>
           <Button variant="plain" color="primary">
@@ -233,7 +233,7 @@ export default function ButtonPage() {
           process taking place.
         </Typography>
         <GroupBox block>
-          <GroupRow justifyContent="start" width={500}>
+          <GroupRow justifyContent="start">
             <Button
               variant="plain"
               color="primary"

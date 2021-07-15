@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "@emotion/styled";
 import ScrollCatalog from "./ScrollCatalog";
 import PropTypes from "prop-types";
-import { ButtonPageContentContext } from "../context";
+import { PageContentNavigationContext } from "../context";
 const Component = styled("section")`
   width: 258px;
   flex-shrink: 0;
@@ -14,7 +14,7 @@ const Component = styled("section")`
 `;
 /* For Content Catalog */
 export default function ContentNavigation(props) {
-  const { routePath, anchors } = React.useContext(ButtonPageContentContext);
+  const { routePath, anchors } = React.useContext(PageContentNavigationContext);
   // const [path, setPath] = React.useState(props.routePath);
   // const [anchors, setAnchors] = React.useState(props.anchors);
   return (

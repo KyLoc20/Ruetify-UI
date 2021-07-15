@@ -1,5 +1,6 @@
 import * as React from "react";
-const ButtonPageContentContext = React.createContext({
+const PageContentNavigationContext = React.createContext(null);
+const ButtonPageContent = {
     routePath: "components/button",
     anchors: [
         { anchor: "ac-variant", text: "Variant" },
@@ -10,5 +11,17 @@ const ButtonPageContentContext = React.createContext({
         { anchor: "ac-rounded", text: "Rounded" },
         { anchor: "ac-loading", text: "Loading" },
     ],
-});
-export { ButtonPageContentContext }
+}
+const CheckboxPageContent = {
+    routePath: "components/checkbox",
+    anchors: [
+        { anchor: "ac-variant", text: "Variant" },
+        { anchor: "ac-color", text: "Color" },
+        { anchor: "ac-size", text: "Size" },
+        { anchor: "ac-depressed", text: "Depressed" },
+        { anchor: "ac-tile", text: "Tile" },
+        { anchor: "ac-rounded", text: "Rounded" },
+        { anchor: "ac-loading", text: "Loading" },
+    ],
+};
+export { PageContentNavigationContext, ButtonPageContent, CheckboxPageContent }
