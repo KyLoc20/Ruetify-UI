@@ -7,7 +7,8 @@ import {
   PageContentNavigationContext,
   CheckboxPageContent,
 } from "../../../src/context";
-export default function CheckboxPage() {
+function CheckboxPage(props) {
+  const { currentNavigationLabel, pageContent, version } = props;
   const [controlled, setControlled] = React.useState(true);
   const controlledLabel = React.useMemo(
     () => (controlled ? "This one is Checked" : "This one is Unchecked"),
@@ -15,8 +16,8 @@ export default function CheckboxPage() {
   );
   const handleCheckboxChange = (e) => setControlled(e.value);
   return (
-    <PageContentNavigationContext.Provider value={{ ...CheckboxPageContent }}>
-      <Page>
+    <PageContentNavigationContext.Provider value={{ ...pageContent }}>
+      <Page currentNavigationLabel={currentNavigationLabel}  version={version}>
         <Typography type="h1">Checkbox</Typography>
         <Typography type="p" description>
           The <code>Checkbox</code> component provides users the ability to
@@ -188,3 +189,18 @@ export default function CheckboxPage() {
     </PageContentNavigationContext.Provider>
   );
 }
+// This function gets called at build time
+export async function getStaticProps() {
+  // Call an external API endpoint to get posts
+  const currentNavigationLabel = "checkbox";
+  const pageContent = CheckboxPageContent;
+  // By returning { props: { posts } }, the Blog component
+  // will receive `posts` as a prop at build time
+  return {
+    props: {
+      currentNavigationLabel,
+      pageContent,
+    },
+  };
+}
+export default CheckboxPage;

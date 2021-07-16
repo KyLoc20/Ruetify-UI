@@ -3,18 +3,21 @@ import Page from "../../../src/components/Page";
 import Typography from "../../../ui/Typography/Typography";
 import { GroupRow, GroupBox } from "../../../ui/layout/Group";
 import Button from "../../../ui/Button/Button";
-import { PageContentNavigationContext, ButtonPageContent } from "../../../src/context";
-export default function ButtonPage() {
+import {
+  PageContentNavigationContext,
+  ButtonPageContent,
+} from "../../../src/context";
+function ButtonPage(props) {
+  const { currentNavigationLabel, pageContent, version } = props;
+  console.log("ButtonPage", props);
   const [isLoading, setIsLoading] = React.useState(false);
   const handleChangeLoading = () => {
     setIsLoading((prevValue) => !prevValue);
     console.log("handleChangeLoading", isLoading);
   };
   return (
-    <PageContentNavigationContext.Provider
-      value={{...ButtonPageContent}}
-    >
-      <Page>
+    <PageContentNavigationContext.Provider value={{ ...pageContent }}>
+      <Page currentNavigationLabel={currentNavigationLabel} version={version}>
         <Typography type="h1">Buttons</Typography>
         <Typography type="p" description>
           The <code>Button</code> component replaces the standard html button
@@ -250,3 +253,18 @@ export default function ButtonPage() {
     </PageContentNavigationContext.Provider>
   );
 }
+// This function gets called at build time
+export async function getStaticProps() {
+  // Call an external API endpoint to get posts
+  const currentNavigationLabel = "button";
+  const pageContent = ButtonPageContent;
+  // By returning { props: { posts } }, the Blog component
+  // will receive `posts` as a prop at build time
+  return {
+    props: {
+      currentNavigationLabel,
+      pageContent,
+    },
+  };
+}
+export default ButtonPage;
