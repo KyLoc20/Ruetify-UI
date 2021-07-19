@@ -24,4 +24,10 @@ const CheckboxPageContent = {
         { anchor: "ac-label-placement", text: "Label placement" },
     ],
 };
-export { PageContentNavigationContext, ButtonPageContent, CheckboxPageContent }
+const LabPageContent = {
+    routePath: "components/test",
+    anchors: [],
+};
+
+
+export { PageContentNavigationContext, ButtonPageContent, CheckboxPageContent, LabPageContent }
