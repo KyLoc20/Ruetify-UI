@@ -22,22 +22,7 @@ export async function getStaticProps() {
     },
   };
 }
-const FreezeArrayPropsTestComponent = styled("div")``;
-function FreezeArrayPropsTest(props) {
-  console.log(
-    "Freeze Array: ",
-    props.value,
-    typeof props.value,
-    Object.isFrozen(props.value)
-  );
-  //props.value[0] = 10;
-  return (
-    <FreezeArrayPropsTestComponent>{props.value}</FreezeArrayPropsTestComponent>
-  );
-}
-FreezeArrayPropsTest.propTypes = {
-  value: PropTypes.arrayOf(PropTypes.number),
-};
+
 function LabPage(props) {
   const { currentNavigationLabel, pageContent, version } = props;
   return (
@@ -51,12 +36,60 @@ function LabPage(props) {
           Type Check Object.freeze()
         </Typography>
         <GroupBox>
-          <FreezeArrayPropsTest
-            value={Object.freeze([1, 2])}
-          ></FreezeArrayPropsTest>
+          <FreezeArrayPropsTest value={(Object.freeze([1,2]))}></FreezeArrayPropsTest>
         </GroupBox>
       </Page>
     </PageContentNavigationContext.Provider>
   );
 }
+
+const FreezeArrayPropsTestComponent = styled("div")``;
+function FreezeArrayPropsTest(props) {
+  console.log(
+    "Freeze Array: ",
+    props.value,
+    typeof props.value,
+    Array.isArray(props.value),
+    Object.getOwnPropertyDescriptors(props.value),
+    Object.isFrozen(props.value)
+  );
+  // props.value[0] = 10;
+  return (
+    <FreezeArrayPropsTestComponent>{props.value}</FreezeArrayPropsTestComponent>
+  );
+}
+const isImmutable = (obj) =>
+  !Object.isExtensible(obj) || Object.isSealed(obj) || Object.isFrozen(obj);
+
+const mutableArrayOf = function (innerTypes) {
+  function validate(props, propName, componentName) {
+    const arr = props[propName];
+    /**
+     * check array and inner elements here.
+     */
+    PropTypes.checkPropTypes(
+      { array: PropTypes.arrayOf(innerTypes) },
+      { array: arr },
+      `prop`,
+      `${componentName}.${propName}`
+    );
+    /**
+     * check mutable here.
+     */
+    if (isImmutable(arr)) {
+      //todo send the error info to the upper PropTypes.oneOfType()
+      return new Error(
+        `Invalid prop [${arr}] supplied to ${componentName}. Validation failed due to this is immutable.`
+      );
+    }
+  }
+  return validate;
+};
+
+FreezeArrayPropsTest.propTypes = {
+  value: PropTypes.oneOfType([
+    PropTypes.number,
+    mutableArrayOf(PropTypes.number),
+  ]),
+};
 export default LabPage;
