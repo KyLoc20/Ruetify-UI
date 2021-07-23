@@ -35,6 +35,12 @@ function LabPage(props) {
         <Typography type="h2" id="ac-basic-checkboxes">
           Type Check Object.freeze()
         </Typography>
+        <div style={{ fontWeight: 100, fontSize: 20 }}>Welcome to Next.js</div>
+        <div style={{ fontWeight: 300, fontSize: 20 }}>Welcome to Next.js</div>
+        <div style={{ fontWeight: 400, fontSize: 20 }}>Welcome to Next.js</div>
+        <div style={{ fontWeight: 500, fontSize: 20 }}>Welcome to Next.js</div>
+        <div style={{ fontWeight: 700, fontSize: 20 }}>Welcome to Next.js</div>
+        <div style={{ fontWeight: 800, fontSize: 20 }}>Welcome to Next.js</div>
         <GroupBox>
           <FreezeArrayPropsTest value={(Object.freeze([1,2]))}></FreezeArrayPropsTest>
         </GroupBox>

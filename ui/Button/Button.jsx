@@ -15,6 +15,7 @@ const ButtonDefaultRemoval = styled("button")`
   user-select: none;
   background: transparent;
   box-sizing: border-box;
+  font-family: "Roboto";
 `;
 const ButtonComponent = styled(ButtonDefaultRemoval)`
   display: inline-flex;
@@ -26,7 +27,7 @@ const ButtonComponent = styled(ButtonDefaultRemoval)`
   padding: 0 16px;
   color: rgba(0, 0, 0, 0.6);
   font-size: 0.875rem;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.0892857143em;
   transition: background 280ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   overflow: hidden;
@@ -75,7 +76,7 @@ export default function Button(props) {
         "btn",
         props.disabled && "disabled",
         props.loading && "loading",
-        props.variant,
+        props.variant
       ),
     [props.variant, props.loading, props.disabled]
   );
