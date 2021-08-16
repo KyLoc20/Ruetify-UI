@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import React, { useState, useEffect } from "react";
+import * as React from "react";
 import AppDetail from "./AppDetail";
 import NavigationCatalog from "./NavigationCatalog";
 import AppBar from "./AppBar";

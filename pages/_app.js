@@ -1,4 +1,4 @@
-import '../src/styles/global.css'
+import '../styles/globals.css'
 
 export default function App({ Component, pageProps }) {
     pageProps.version = "v0.3.1"
